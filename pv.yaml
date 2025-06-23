@@ -1,0 +1,14 @@
+# pv.yaml
+# Defines the PersistentVolume (PV), a piece of storage in the cluster.
+# It provides a specific amount of storage and access mode.
+apiVersion: v1
+kind: PersistentVolume # A specific piece of storage in the cluster.
+metadata:
+  name: nginx-pv # A unique identifier for the PV.
+spec:
+  capacity:
+    storage: 1Gi # Total storage size available.
+  accessModes:
+    - ReadWriteOnce # Can be mounted as read-write by a single node.
+  hostPath:
+    path: "/tmp/nginx" # 

@@ -1,0 +1,15 @@
+# service.yaml
+# Creates a stable network endpoint (Service) for the Nginx pods.
+# 'ClusterIP' makes it reachable only from within the Kubernetes cluster.
+apiVersion: v1
+kind: Service # A stable network endpoint for accessing Pods.
+metadata:
+  name: nginx-service # A unique identifier for the service.
+spec:
+  selector:
+    app: nginx-pod # Route traffic to any Pod with the label 'app: nginx-pod'.
+  ports:
+    - protocol: TCP
+      port: 80 # The service will be available on port 80.
+      targetPort: 80 # Forward traffic to port 80 on the pods.
+  type: ClusterIP

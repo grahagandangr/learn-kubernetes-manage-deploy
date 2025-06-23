@@ -1,0 +1,13 @@
+# pvc.yaml
+# Defines the PersistentVolumeClaim (PVC), a request for storage by a user.
+# It specifies the amount of storage needed and the access mode.
+apiVersion: v1
+kind: PersistentVolumeClaim # A request for storage by a user.
+metadata:
+  name: nginx-pvc # A unique identifier for the PVC.
+spec:
+  accessModes:
+    - ReadWriteOnce # Must match the access mode of the PV.
+  resources:
+    requests:
+      storage: 1Gi # The amount of storage being requested.

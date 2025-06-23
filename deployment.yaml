@@ -1,0 +1,29 @@
+# deployment.yaml
+# Manages the deployment of the Nginx application pods.
+# It ensures that 3 replicas are running and handles their lifecycle.
+apiVersion: apps/v1
+kind: Deployment # A set of Pods running the same application.
+metadata:
+  name: nginx-deployment # A unique identifier for the deployment.
+spec:
+  replicas: 3 # 3 replicas of the pod will be running.
+  selector:
+    matchLabels:
+      app: nginx-pod # The deployment will use this label to find the pods.
+  template:
+    metadata:
+      labels:
+        app: nginx-pod # Pods created by this deployment will have this label.
+    spec:
+      containers:
+      - name: nginx-container # Name of the container.
+        image: nginx:latest # Use the latest Nginx image.
+        ports:
+        - containerPort: 80 # The application listens on port 80 inside the container.
+        volumeMounts:
+        - name: nginx-storage # Mount the volume named 'nginx-storage'.
+          mountPath: /usr/share/nginx/html # The path where the volume will be mounted.
+      volumes:
+      - name: nginx-storage # Define the volume to be used by the container.
+        persistentVolumeClaim:
+          claimName: nginx-pvc # Link this volume to our PersistentVolumeClaim.
